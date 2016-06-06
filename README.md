@@ -6,8 +6,6 @@ This system install and API is designed specifically around videos modification 
 ** This system is compiled GPU support.  In it current state can use only a single GPU core.  So it is best to use it with a g2.2xlarge.
 * Cuda 7.5
 * Nvidia Driver 358
-* wget http://developer.download.nvidia.com/compute/nvenc/v5.0/nvenc_5.0.1_sdk.zip -O sdk.zip
-** unzip sdk.zip
 
 ## Bitfusion FFMPEG API
 
