@@ -1,11 +1,11 @@
 # Bitfusion Video Transcoding Service
 
-This system currently is designe specifically around videos modification tasks.  As an input file it will take one video file carry out the task and return the Video back.
+This system install and API is designed specifically around videos modification tasks.  It will take a singular input file, carry out the task on the file, and return a file back.
 
 * CPU & GPU enabled
-** Benefits from a GPU, but only uses a single GPU core.  So best to use with a g2.2xlarge
+** This system is compiled GPU support.  In it current state can use only a single GPU core.  So it is best to use it with a g2.2xlarge.
 * Cuda 7.5
-* Nvidia Driver 352
+* Nvidia Driver 358
 * wget http://developer.download.nvidia.com/compute/nvenc/v5.0/nvenc_5.0.1_sdk.zip -O sdk.zip
 ** unzip sdk.zip
 
