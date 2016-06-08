@@ -200,11 +200,11 @@ ffmpeg -i big_buck_bunny_480p_surround-fix.avi -sameq big_buck_bunny_480p_surrou
 ```
 ffmpeg -i big_buck_bunny_480p_surround-fix.avi -b 128k big_buck_bunny_480p_surround-fix-128.avi
 ```
-# Transcode with libx264
+## Transcode with libx264
 ```
 ffmpeg -y -i big_buck_bunny_480p_surround-fix.avi -vcodec libx264 -b:v 5M -acodec copy big_buck_bunny_720p_stereo.mp4
-
-# Transcode with nvidia GPU
+```
+## Transcode with nvidia GPU
 ```
 ffmpeg -y -i big_buck_bunny_480p_surround-fix.avi -vcodec nvenc -b:v 5M -acodec copy big_buck_bunny_480p_surround-fix-nvenc.mp4
 ```
