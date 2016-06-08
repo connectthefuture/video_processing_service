@@ -184,3 +184,29 @@ curl -O -X GET \
 # Expected output
 # The rendered file will be saved locally
 ```
+
+
+## Tested Commands
+
+### Convert an avi file into mpg format
+```
+ffmpeg -i big_buck_bunny_480p_surround-fix.avi big_buck_bunny_480p_surround-fix.mpg
+```
+## Convert and maintain quality
+```
+ffmpeg -i big_buck_bunny_480p_surround-fix.avi -sameq big_buck_bunny_480p_surround-fix.mpg
+```
+## Set the Bitrate to 128K
+```
+ffmpeg -i big_buck_bunny_480p_surround-fix.avi -b 128k big_buck_bunny_480p_surround-fix-128.avi
+```
+# Transcode with libx264
+```
+ffmpeg -y -i big_buck_bunny_480p_surround-fix.avi -vcodec libx264 -b:v 5M -acodec copy big_buck_bunny_720p_stereo.mp4
+
+# Transcode with nvidia GPU
+```
+ffmpeg -y -i big_buck_bunny_480p_surround-fix.avi -vcodec nvenc -b:v 5M -acodec copy big_buck_bunny_480p_surround-fix-nvenc.mp4
+```
+
+
