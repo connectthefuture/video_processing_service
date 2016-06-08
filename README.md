@@ -7,6 +7,20 @@ This system install and API is designed specifically around videos modification 
 * Cuda 7.5
 * Nvidia Driver 358
 
+## Benchmarks
+
+Input File: big_buck_bunny_480p_surround-fix.avi
+
+Command:
+```
+ffmpeg -y -i big_buck_bunny_480p_surround-fix.avi -vcodec libx264 -b:v 5M -acodec copy big_buck_bunny_720p_stereo.mp4
+```
+
+| System                | Time        |
+|-----------------------|-------------|
+| Mac Laptop/vagrant    | 19m27.484s  |
+
+
 ## Bitfusion FFMPEG API
 
 
