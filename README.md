@@ -204,6 +204,12 @@ ffmpeg -i big_buck_bunny_480p_surround-fix.avi -b 128k big_buck_bunny_480p_surro
 ```
 ffmpeg -y -i big_buck_bunny_480p_surround-fix.avi -vcodec libx264 -b:v 5M -acodec copy big_buck_bunny_720p_stereo-libx264.mp4
 ```
+
+## Extract a Singel Frame
+```
+ffmpeg -i big_buck_bunny_480p_surround-fix.avi -ss 60 -t 1 -s 480x300 -f image2 big_buck_bunny_frame.jpg
+```
+
 ## Transcode with nvidia GPU
 ```
 ffmpeg -y -i big_buck_bunny_480p_surround-fix.avi -vcodec nvenc -b:v 5M -acodec copy big_buck_bunny_480p_surround-fix-nvenc.mp4
