@@ -194,7 +194,7 @@ ffmpeg -i big_buck_bunny_480p_surround-fix.avi big_buck_bunny_480p_surround-fix.
 ```
 ## Convert and maintain quality
 ```
-ffmpeg -i big_buck_bunny_480p_surround-fix.avi -sameq big_buck_bunny_480p_surround-fix.mpg
+ffmpeg -i big_buck_bunny_480p_surround-fix.avi -qscale 0 big_buck_bunny_480p_surround-fix.mpg
 ```
 ## Set the Bitrate to 128K
 ```
