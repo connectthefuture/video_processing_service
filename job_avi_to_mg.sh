@@ -11,7 +11,7 @@
 
 token="i-7941aee5"
 host_ip="52.91.234.217"
-intput_file="big_buck_bunny_480p_surround-fix.avi"
+input_file="big_buck_bunny_480p_surround-fix.avi"
 output_file="big_buck_bunny_480p_surround-fix.mpg"
 cmd_args=""
 
