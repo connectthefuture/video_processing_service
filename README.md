@@ -1,24 +1,23 @@
 # Bitfusion Video Transcoding Service
 
-This system install and API is designed specifically around videos modification tasks.  It will take a singular input file, carry out the task on the file, and return a file back.
+This system and API are built on top of ffmpeg, a leading multimedia 
+framework capable of manipulating or playing just about anything created.
 
-* CPU & GPU enabled
-** This system is compiled GPU support.  In it current state can use only a single GPU core.  So it is best to use it with a g2.2xlarge.
-* Cuda 7.5
-* Nvidia Driver 358
+This system install and API is designed specifically around video modification tasks.
+It will take a singular input file, carry out the task on the file, and return a file back.
+
 
 ## Benchmarks
 
 Input File: big_buck_bunny_480p_surround-fix.avi
+Size: 210MB
 
-Command:
-```
-ffmpeg -y -i big_buck_bunny_480p_surround-fix.avi -vcodec libx264 -b:v 5M -acodec copy big_buck_bunny_720p_stereo.mp4
-```
 
-| System                | Time        |
-|-----------------------|-------------|
-| Mac Laptop/vagrant    | 19m27.484s  |
+| System             | Video Codec | CPU | GPU | Time        |
+|--------------------|-------------|-----|-----|-------------|
+| Mac Laptop/vagrant | libx264     | yes | no  | 19m27.484s  |
+| g2.2xlarge         | libx264     | yes | no  | 59s         | 
+| g2.2xlarge         | nvenc       | no  | yes | 22s         |    
 
 
 ## Bitfusion FFMPEG API

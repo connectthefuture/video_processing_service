@@ -93,3 +93,11 @@ ENV/
 *.mpg
 *.avi
 *.jpg
+*.mp4
+examples/*.mpg
+examples/*.avi
+examples/*.jpg
+examples/*.mp4
+
+.idea/
+.idea/*

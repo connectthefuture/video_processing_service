@@ -9,11 +9,11 @@
 # CONFIG
 ###############################################################################
 
-token="i-c664de5a"
-host_ip="54.86.169.223"
+token="i-8d3fbb11"
+host_ip="52.91.46.165"
 input_file="big_buck_bunny_480p_surround-fix.avi"
-output_file="big_buck_bunny_480p_surround-fix-nvenc.mp4"
-cmd_args='-vcodec nvenc -b:v 5M -acodec copy'
+output_file="big_buck_bunny_480p_surround-fix.jpg"
+cmd_args='-ss 60 -vframes 1 -s 480x300 -f image2'
 
 ###############################################################################
 # FUNCTIONS
@@ -78,22 +78,32 @@ count=0
 while true; do
     json_output=$(get_job_status ${job_id})
     state=$(echo ${json_output} | jq -r .state)
-    if [ "${state}" == "SUCCESS" ]; then
-	      echo ""
-        echo "State: ${state}"
-        rendered_file=$(echo ${json_output} | jq -r .result.output_file )
-	      printf '\n%s %d\n' "Render Time(s):" "$count"
-        break
-    else
-	    if [ "${count}" == 0 ]; then
+    return_code=$(echo ${json_output} | jq -r .result.cmd_return_code)
+
+    if [ "${state}" == "PENDING" ]; then
+ 	    if [ "${count}" == 0 ]; then
         echo "State: Running"
 	     else
 		    printf '.'
 	    fi
       sleep 1
 	    (( count++ ))
+
+    elif [ "${state}" == "SUCCESS" ] && [ ${return_code} -eq 0 ]; then
+	     echo ""
+        echo "State: ${state}"
+        rendered_file=$(echo ${json_output} | jq -r .result.output_file )
+	      printf '\n%s %d\n' "Render Time(s):" "$count"
+        break
+
+    elif [ ${return_code} -ne 0 ]; then
+        echo ""
+        echo "The FFmpeg task failed"
+        echo "Return output:" ${json_output}
+        exit 1
     fi
 done
+
 
 echo ""
 echo "Downloading Output:"

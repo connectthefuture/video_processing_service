@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-set -x
 ###############################################################################
 # Description: The following script submits a job to convert a file from an
 #              AVI to a mpeg.
@@ -11,11 +10,11 @@ set -x
 # CONFIG
 ###############################################################################
 
-token="i-c664de5a"
-host_ip="54.86.169.223"
+token="i-8d3fbb11"
+host_ip="52.91.46.165"
 input_file="big_buck_bunny_480p_surround-fix.avi"
-output_file="big_buck_bunny_480p_surround-fix-qscale.mpg"
-cmd_args='-qscale 0'
+output_file="big_buck_bunny_480p_surround-fix-128k.mpg"
+cmd_args='-b:v 128k'
 
 ###############################################################################
 # FUNCTIONS
@@ -27,7 +26,7 @@ function submit_blender_job() {
     local output_file=$2
     local cmd_args=$3
 
-    curl -X POST \
+    curl --silent -X POST \
       -H "X-Auth-Token: ${token}" \
       -H "Cache-Control: no-cache" \
       -H "Content-Type: application/json" \
@@ -80,22 +79,32 @@ count=0
 while true; do
     json_output=$(get_job_status ${job_id})
     state=$(echo ${json_output} | jq -r .state)
-    if [ "${state}" == "SUCCESS" ]; then
-	      echo ""
-        echo "State: ${state}"
-        rendered_file=$(echo ${json_output} | jq -r .result.output_file )
-	      printf '\n%s %d\n' "Render Time(s):" "$count"
-        break
-    else
-	    if [ "${count}" == 0 ]; then
+    return_code=$(echo ${json_output} | jq -r .result.cmd_return_code)
+
+    if [ "${state}" == "PENDING" ]; then
+ 	    if [ "${count}" == 0 ]; then
         echo "State: Running"
 	     else
 		    printf '.'
 	    fi
       sleep 1
 	    (( count++ ))
+
+    elif [ "${state}" == "SUCCESS" ] && [ ${return_code} -eq 0 ]; then
+	     echo ""
+        echo "State: ${state}"
+        rendered_file=$(echo ${json_output} | jq -r .result.output_file )
+	      printf '\n%s %d\n' "Render Time(s):" "$count"
+        break
+
+    elif [ ${return_code} -ne 0 ]; then
+        echo ""
+        echo "The FFmpeg task failed"
+        echo "Return output:" ${json_output}
+        exit 1
     fi
 done
+
 
 echo ""
 echo "Downloading Output:"
