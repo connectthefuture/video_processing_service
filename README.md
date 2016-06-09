@@ -218,7 +218,7 @@ ffmpeg -y -i big_buck_bunny_480p_surround-fix.avi -vcodec nvenc -b:v 5M -acodec 
 ## Show File Information (Checks inputs & Ouputs) NOT IMPLEMENTED
 ```
  ffmpeg_build/bin/ffprobe -print_format json big_buck_bunny_480p_surround-fix.avi -v quiet -show_streams  -show_format
- ``
+```
  
  Output:
  ```
