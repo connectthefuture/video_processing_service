@@ -215,4 +215,111 @@ ffmpeg -i big_buck_bunny_480p_surround-fix.avi -ss 60 -t 1 -s 480x300 -f image2 
 ffmpeg -y -i big_buck_bunny_480p_surround-fix.avi -vcodec nvenc -b:v 5M -acodec copy big_buck_bunny_480p_surround-fix-nvenc.mp4
 ```
 
-
+## Show File Information (Checks inputs & Ouputs) NOT IMPLEMENTED
+```
+ ffmpeg_build/bin/ffprobe -print_format json big_buck_bunny_480p_surround-fix.avi -v quiet -show_streams  -show_format
+ ``
+ 
+ Output:
+ ```
+ {
+    "streams": [
+        {
+            "index": 0,
+            "codec_name": "mpeg4",
+            "codec_long_name": "MPEG-4 part 2",
+            "profile": "Simple Profile",
+            "codec_type": "video",
+            "codec_time_base": "1/24",
+            "codec_tag_string": "FMP4",
+            "codec_tag": "0x34504d46",
+            "width": 854,
+            "height": 480,
+            "coded_width": 854,
+            "coded_height": 480,
+            "has_b_frames": 0,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "427:240",
+            "pix_fmt": "yuv420p",
+            "level": 1,
+            "chroma_location": "left",
+            "refs": 1,
+            "quarter_sample": "false",
+            "divx_packed": "false",
+            "r_frame_rate": "24/1",
+            "avg_frame_rate": "24/1",
+            "time_base": "1/24",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 14315,
+            "duration": "596.458333",
+            "bit_rate": "2500431",
+            "nb_frames": "14315",
+            "disposition": {
+                "default": 0,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0
+            }
+        },
+        {
+            "index": 1,
+            "codec_name": "ac3",
+            "codec_long_name": "ATSC A/52A (AC-3)",
+            "codec_type": "audio",
+            "codec_time_base": "1/48000",
+            "codec_tag_string": "[0] [0][0]",
+            "codec_tag": "0x2000",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 6,
+            "channel_layout": "5.1(side)",
+            "bits_per_sample": 0,
+            "dmix_mode": "-1",
+            "ltrt_cmixlev": "-1.000000",
+            "ltrt_surmixlev": "-1.000000",
+            "loro_cmixlev": "-1.000000",
+            "loro_surmixlev": "-1.000000",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/56000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "bit_rate": "448000",
+            "nb_frames": "33401088",
+            "disposition": {
+                "default": 0,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0
+            }
+        }
+    ],
+    "format": {
+        "filename": "big_buck_bunny_480p_surround-fix.avi",
+        "nb_streams": 2,
+        "nb_programs": 0,
+        "format_name": "avi",
+        "format_long_name": "AVI (Audio Video Interleaved)",
+        "start_time": "0.000000",
+        "duration": "596.458333",
+        "size": "220514438",
+        "bit_rate": "2957650",
+        "probe_score": 100
+    }
+}
+ ```
