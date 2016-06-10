@@ -19,15 +19,15 @@ FFmpeg is compiled with following libraries:
 
 ## Benchmarks
 
- * Input File: big_buck_bunny_480p_surround-fix.avi
- * Size: 210MB
+ * Input File: big_buck_bunny_720p_stereo.avi.avi
+ * Size: 393MB
 
 
 | System               | Video Codec | CPU | GPU | Time        |
 |----------------------|-------------|-----|-----|-------------|
-| AWS g2.2xlarge       | nvenc       | no  | yes | 22s         |    
-| AWS g2.2xlarge       | libx264     | yes | no  | 59s         | 
-| Local Laptop/vagrant | libx264     | yes | no  | 19m27.484s  |
+| AWS g2.8xlarge       | nvenc       | no  | yes | 44s         |    
+| AWS g2.8xlarge       | libx264     | yes | no  | 227s        | 
+| Local Laptop/vagrant | libx264     | yes | no  | 30m14s      |
 
 
 ## API
@@ -163,7 +163,7 @@ curl -X GET \
 #     "result": {
 #         "cmd": "...."
 #     "cmd_return_code": 0,
-#     "output_file": "big_buck_bunny_720p_.avi",
+#     "output_file": "big_buck_bunny_720p_stereo_libx264.avi",
 #     "task_id": "890e7930-ab3c-4cfd-a51b-2c1c52b1c11d",
 #   },
 #   "state": "SUCCESS"
