@@ -4,7 +4,6 @@
 # Description: Transcode using libx264
 ###############################################################################
 
-
 ###############################################################################
 # CONFIG
 ###############################################################################
@@ -12,8 +11,8 @@
 token="i-8d3fbb11"
 host_ip="52.91.46.165"
 input_file="big_buck_bunny_480p_surround-fix.avi"
-output_file="big_buck_bunny_480p_surround-fix.jpg"
-cmd_args='-ss 60 -vframes 1 -s 480x300 -f image2'
+output_file="big_buck_bunny_480p_surround-fix-nvenc.mp4"
+cmd_args='-vcodec nvenc -b:v 5M -acodec copy'
 
 ###############################################################################
 # FUNCTIONS
@@ -93,7 +92,7 @@ while true; do
 	     echo ""
         echo "State: ${state}"
         rendered_file=$(echo ${json_output} | jq -r .result.output_file )
-	      printf '\n%s %d\n' "Render Time(s):" "$count"
+	      printf '\n%s %d\n' "Processing Time:" "$count"
         break
 
     elif [ ${return_code} -ne 0 ]; then
@@ -103,7 +102,6 @@ while true; do
         exit 1
     fi
 done
-
 
 echo ""
 echo "Downloading Output:"

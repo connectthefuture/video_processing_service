@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
+###############################################################################
+# Description: The following script submits a job to convert a file from an
+#              AVI to a mpeg.  
+###############################################################################
 
-###############################################################################
-# Description: Transcode using libx264
-###############################################################################
 
 ###############################################################################
 # CONFIG
@@ -11,8 +12,9 @@
 token="i-8d3fbb11"
 host_ip="52.91.46.165"
 input_file="big_buck_bunny_480p_surround-fix.avi"
-output_file="big_buck_bunny_480p_surround-fix-nvenc.mp4"
-cmd_args='-vcodec nvenc -gpu 1 -b:v 5M -acodec copy'
+output_file="big_buck_bunny_480p_surround-fix.mpg"
+cmd_args=""
+
 
 ###############################################################################
 # FUNCTIONS
@@ -24,12 +26,13 @@ function submit_blender_job() {
     local output_file=$2
     local cmd_args=$3
 
-    curl --silent -X POST \
+    curl -X POST \
       -H "X-Auth-Token: ${token}" \
       -H "Cache-Control: no-cache" \
       -H "Content-Type: application/json" \
       -d '{ "input_file": "'${input_file}'", "output_file": "'${output_file}'", "cmd_args": "'"${cmd_args}"'" }' \
       http://${host_ip}:5000/job/
+
 
 }
 
@@ -65,7 +68,7 @@ sleep 1
 
 echo ""
 echo "Submitting Job"
-json_output=$( submit_blender_job ${input_file} ${output_file} "${cmd_args}" )
+json_output=$(submit_blender_job ${input_file} ${output_file} "${cmd_args}" )
 echo $json_output | jq .
 job_id=$(echo ${json_output} | jq -r .task_id)
 
@@ -92,7 +95,7 @@ while true; do
 	     echo ""
         echo "State: ${state}"
         rendered_file=$(echo ${json_output} | jq -r .result.output_file )
-	      printf '\n%s %d\n' "Render Time(s):" "$count"
+	      printf '\n%s %d\n' "Processing Time:" "$count"
         break
 
     elif [ ${return_code} -ne 0 ]; then
@@ -102,6 +105,7 @@ while true; do
         exit 1
     fi
 done
+
 
 echo ""
 echo "Downloading Output:"

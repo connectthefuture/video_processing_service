@@ -94,7 +94,7 @@ while true; do
 	     echo ""
         echo "State: ${state}"
         rendered_file=$(echo ${json_output} | jq -r .result.output_file )
-	      printf '\n%s %d\n' "Render Time(s):" "$count"
+	      printf '\n%s %d\n' "Processing Time:" "$count"
         break
 
     elif [ ${return_code} -ne 0 ]; then

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 ###############################################################################
-# Description: Transcode using libx264
+# Description: The following script submits a job to convert a file from an
+#              AVI to a mpeg.
 ###############################################################################
 
 
@@ -12,8 +13,8 @@
 token="i-8d3fbb11"
 host_ip="52.91.46.165"
 input_file="big_buck_bunny_480p_surround-fix.avi"
-output_file="big_buck_bunny_480p_surround-fix-lbx264.mp4"
-cmd_args='-vcodec libx264 -b:v 5M -acodec copy'
+output_file="big_buck_bunny_480p_surround-fix-qscale.mpg"
+cmd_args='-qscale 0'
 
 ###############################################################################
 # FUNCTIONS
@@ -25,7 +26,7 @@ function submit_blender_job() {
     local output_file=$2
     local cmd_args=$3
 
-    curl --silent -X POST \
+    curl -X POST \
       -H "X-Auth-Token: ${token}" \
       -H "Cache-Control: no-cache" \
       -H "Content-Type: application/json" \
@@ -93,7 +94,7 @@ while true; do
 	     echo ""
         echo "State: ${state}"
         rendered_file=$(echo ${json_output} | jq -r .result.output_file )
-	      printf '\n%s %d\n' "Render Time(s):" "$count"
+	      printf '\n%s %d\n' "Processing Time:" "$count"
         break
 
     elif [ ${return_code} -ne 0 ]; then

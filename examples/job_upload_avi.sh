@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-
-token="i-8d3fbb11"
-host_ip="52.91.46.165"
+token="i-53df5ccf"
+host_ip="52.87.192.160"
 input_file="big_buck_bunny_480p_surround-fix.avi"
 
 ###############################################################################
